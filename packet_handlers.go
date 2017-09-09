@@ -99,6 +99,9 @@ func (p *Parser) handleGameEvent(ge *msg.CSVCMsg_GameEvent) {
 	var data map[string]*msg.CSVCMsg_GameEventKeyT
 
 	switch d.Name {
+	case "round_announce_match_start": // Special round/match start announcement
+		p.eventDispatcher.Dispatch(events.MatchStartedEvent{})
+
 	case "round_start": // Round started
 		data = mapGameEventData(d, ge)
 		p.eventDispatcher.Dispatch(events.RoundStartedEvent{
@@ -391,7 +394,6 @@ func (p *Parser) handleGameEvent(ge *msg.CSVCMsg_GameEvent) {
 
 	// Probably not that interesting:
 	case "buytime_ended": // Not actually end of buy time, seems to only be sent once per game at the start
-	case "round_announce_match_start": // Special match start announcement
 	case "player_footstep": // Footstep sound
 	case "bomb_beep": // Bomb beep
 	case "player_spawn": // Player spawn
