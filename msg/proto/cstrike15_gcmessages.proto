@@ -1,9 +1,7 @@
 import "steammessages.proto";
-import "engine_gcmessages.proto";
 
 option optimize_for = SPEED;
 option cc_generic_services = false;
-option go_package = "msg";
 
 enum ECsgoGCMsg {
 	k_EMsgGCCStrike15_v2_Base = 9100;
@@ -80,12 +78,12 @@ enum ECsgoGCMsg {
 	k_EMsgGCCStrike15_v2_Client2GCStreamUnlock = 9174;
 	k_EMsgGCCStrike15_v2_FantasyRequestClientData = 9175;
 	k_EMsgGCCStrike15_v2_FantasyUpdateClientData = 9176;
+	k_EMsgGCCStrike15_v2_GCToClientSteamdatagramTicket = 9177;
+	k_EMsgGCCStrike15_v2_ClientToGCRequestTicket = 9178;
 	k_EMsgGCCStrike15_v2_ClientToGCRequestElevate = 9179;
 	k_EMsgGCCStrike15_v2_GlobalChat = 9180;
 	k_EMsgGCCStrike15_v2_GlobalChat_Subscribe = 9181;
 	k_EMsgGCCStrike15_v2_GlobalChat_Unsubscribe = 9182;
-	k_EMsgGCCStrike15_v2_ClientAuthKeyCode = 9183;
-	k_EMsgGCCStrike15_v2_GotvSyncPacket = 9184;
 }
 
 message GameServerPing {
@@ -304,7 +302,6 @@ message CMsgGCCStrike15_v2_MatchmakingStart {
 	optional string ticket_data = 3;
 	optional uint32 client_version = 4;
 	optional .TournamentMatchSetup tournament_match = 5;
-	optional bool prime_only = 6;
 }
 
 message CMsgGCCStrike15_v2_MatchmakingStop {
@@ -402,7 +399,6 @@ message CMsgGCCStrike15_v2_MatchmakingServerReservationResponse {
 	optional uint32 reward_item_attr_reward_idx = 11;
 	optional uint32 reward_drop_list = 12;
 	optional string tournament_tag = 13;
-	optional uint32 steamdatagram_port = 14;
 }
 
 message CMsgGCCStrike15_v2_MatchmakingGC2ClientReserve {
@@ -963,14 +959,5 @@ message CMsgGCCStrike15_v2_ClientToGCChat {
 message CMsgGCCStrike15_v2_GCToClientChat {
 	optional uint32 account_id = 1;
 	optional string text = 2;
-}
-
-message CMsgGCCStrike15_v2_ClientAuthKeyCode {
-	optional uint32 eventid = 1;
-	optional string code = 2;
-}
-
-message CMsgGCCStrike15_GotvSyncPacket {
-	optional .CEngineGotvSyncPacket data = 1;
 }
 

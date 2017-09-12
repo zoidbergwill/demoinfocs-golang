@@ -1,5 +1,6 @@
+import "google/protobuf/descriptor.proto";
+
 option cc_generic_services = false;
-option go_package = "msg";
 
 enum NET_Messages {
 	net_NOP = 0;
